@@ -1,4 +1,5 @@
 
+
 # Installer curl 
 sudo yum -y install curl
 # Procedure d'installation de node.js 
