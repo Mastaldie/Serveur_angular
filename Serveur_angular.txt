@@ -56,13 +56,13 @@ sudo vim help.component.ts
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-aide',
+  selector: 'app-help',
   standalone: true,
   imports: [],
-  templateUrl: './aide.component.html',
-  styleUrl: './aide.component.css'
+  templateUrl: './help.component.html',
+  styleUrl: './help.component.css'
 })
-export class AideComponent {
+export class HelpComponent {
   constructor() { }
 
   ngOnInit(): void {
