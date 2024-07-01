@@ -1,0 +1,94 @@
+
+# Installer curl 
+sudo yum -y install curl
+# Procedure d'installation de node.js 
+# installs fnm (Fast Node Manager)
+curl -fsSL https://fnm.vercel.app/install | bash
+source /home/ec2-user/.bashrc
+# download and install Node.js
+fnm use --install-if-missing 20
+
+# verifies the right Node.js version is in the environment
+node -v # should print `v20.15.0`
+
+# verifies the right NPM version is in the environment
+npm -v # should print `10.7.0`
+
+#on revient au home 
+cd ~
+# On install angular avec npm 
+npm install -g @angular/cli
+# On crée un nouveau projet AWS
+ng new aws 
+# On entre dans le dossier aws
+cd aws 
+# On crée deux composants pour les pages "/home" et "/help"
+ng generate component home
+ng generate component aide
+# On se place dans le dossier src/app/home/ pour editer le fichier home.component.ts
+cd src/app/home
+# On edite le fichier pour inserer le code 
+sudo vim home.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
+})
+export class HomeComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+    console.log("Message de la page Home");
+  }
+
+}
+# on rentre d'un dossier en arrière 
+cd ..
+# on entre dans le dossier help 
+cd help 
+# edite le fichier help.component.ts
+sudo vim help.component.ts 
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-aide',
+  standalone: true,
+  imports: [],
+  templateUrl: './aide.component.html',
+  styleUrl: './aide.component.css'
+})
+export class AideComponent {
+  constructor() { }
+
+  ngOnInit(): void {
+    console.log("Message de la page Help");
+  }
+}
+# on rentre d'un dossier qui est le dossier app 
+cd ..
+# on edite le fichier app.routes.ts
+sudo vim app.routes.ts
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AideComponent } from './aide/aide.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'aide', component: AideComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+# une fois terminé, on lance le serveur et on journalise les erreurs
+# et on lance le serveur en background  
+ng serve >> journal.log & 
